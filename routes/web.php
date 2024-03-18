@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get("/profile/posts/{user_token}", [ProfileController::class, "profile"]);
+Route::get("/profile/images/{user_token}", [ProfileController::class, "images"]);
+Route::get("/profile/jobs/{user_token}", [ProfileController::class, "jobs"]);
