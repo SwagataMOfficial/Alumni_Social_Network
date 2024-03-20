@@ -10,7 +10,7 @@
         @if ($friend)
             <div class="flex gap-4">
                 <button
-                    class="rounded-3xl px-6 py-2 font-bold tracking-wide bg-blue-600 text-white hover:bg-blue-700 flex gap-2">
+                    class="rounded-3xl px-6 py-2 font-bold tracking-wide bg-blue-600 text-white hover:bg-blue-700 flex items-center gap-2">
                     <span>Message</span>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
@@ -21,7 +21,7 @@
                     </span>
                 </button>
                 <button
-                    class="rounded-3xl px-6 py-2 font-bold tracking-wide bg-red-600 text-white hover:bg-red-700 flex gap-2">
+                    class="rounded-3xl px-6 py-2 font-bold tracking-wide bg-red-600 text-white hover:bg-red-700 flex items-center gap-2">
                     <span>Unfriend</span>
                     <span>
                         {{-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
@@ -37,7 +37,7 @@
             </div>
         @else
             <button
-                class="rounded-3xl px-6 py-2 font-bold tracking-wide bg-blue-600 text-white hover:bg-blue-700 flex gap-2">
+                class="rounded-3xl px-6 py-2 font-bold tracking-wide bg-blue-600 text-white hover:bg-blue-700 flex items-center gap-2">
                 <span>Add Friend</span>
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">

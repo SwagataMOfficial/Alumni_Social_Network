@@ -4,6 +4,6 @@
 @endpush
 @section('main-section')
     <h1 class="text-3xl font-bold text-blue-700">
-        Hello world!
+        Settings Page!
     </h1>
 @endsection
