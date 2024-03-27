@@ -13,8 +13,23 @@
                     <x-profilesection friend="1" />
                 </div>
                 <div class="rounded-xl overflow-hidden bg-white pb-4">
-                    <h3 class="text-black font-bold text-2xl pl-8 pt-3">Activity</h3>
+                    <h3 class="text-black font-bold text-2xl pl-8 pt-3">
+                        @if (Request::is('profile/home/*'))
+                            {{ 'About me' }}
+                        @else
+                            {{ 'Activity' }}
+                        @endif
+                    </h3>
                     <nav class="pl-12 mt-4 flex gap-4">
+                        @if (Request::is('profile/home/*'))
+                            <a href="{{ url('/') }}/profile/home/1"
+                                class="bg-sky-200 border-2 border-cyan-500 px-6 py-1 rounded-3xl hover:bg-lime-200 hover:border-green-500 font-semibold"
+                                data-active="true">About</a>
+                        @else
+                            <a href="{{ url('/') }}/profile/home/1"
+                                class="bg-lime-200 border-2 border-green-500 px-6 py-1 rounded-3xl hover:bg-sky-200 hover:border-cyan-500 font-semibold">About</a>
+                        @endif
+
                         @if (Request::is('profile/posts/*'))
                             <a href="{{ url('/') }}/profile/posts/1"
                                 class="bg-sky-200 border-2 border-cyan-500 px-6 py-1 rounded-3xl hover:bg-lime-200 hover:border-green-500 font-semibold"
@@ -47,6 +62,10 @@
                         @endif
                     </nav>
                     @if ($profileStatus)
+                        @if (Request::is('profile/home/1'))
+                            <x-aboutprofile />
+                        @endif
+
                         @if (Request::is('profile/posts/*'))
                             <x-posts />
                         @endif

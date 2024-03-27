@@ -15,7 +15,7 @@ class ProfileMiddleware {
     public function handle(Request $request, Closure $next) {
         $path = $request->server('PATH_INFO');
         $arr = explode('/', $path);
-        if (in_array($arr[2], ['posts', 'images', 'jobs'])) {
+        if (in_array($arr[2], ['home', 'posts', 'images', 'jobs'])) {
             return $next($request);
         }
         else {
