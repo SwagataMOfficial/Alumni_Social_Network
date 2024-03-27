@@ -3,16 +3,16 @@
     <title>Profile-Name | Alumni Junction</title>
 @endpush
 @section('main-section')
-    <div class="container bg-gray-200">
+    <div class="container bg-gray-200 min-h-[calc(100vh-67px)]">
         <div class="w-10/12 mx-auto pt-3 flex justify-center gap-10">
             <div class="w-3/4">
                 <div class="rounded-xl overflow-hidden relative mb-3">
                     <img class="w-full h-40 object-cover" src="/storage/cover.jpg" alt="background image" id="profile-cover">
                     <img class="absolute top-16 left-8 z-10 w-32 aspect-square rounded-[50%] object-cover outline outline-slate-500"
                         src="/storage/profile.jpg" alt="profile picture" id="profile-picture">
-                    <x-profilesection />
+                    <x-profilesection friend="1" />
                 </div>
-                <div class="rounded-xl overflow-hidden relative bg-white pb-4">
+                <div class="rounded-xl overflow-hidden bg-white pb-4">
                     <h3 class="text-black font-bold text-2xl pl-8 pt-3">Activity</h3>
                     <nav class="pl-12 mt-4 flex gap-4">
                         @if (Request::is('profile/posts/*'))
@@ -47,17 +47,22 @@
                         @endif
                     </nav>
                     @if ($profileStatus)
-                        {{-- 
-                        * TODO: add posts/photos/jobs
-                    --}}
-                        <p class="text-3xl font-bold text-blue-800 text-center">Ok</p>
-                        {{-- <div>OK</div> --}}
+                        @if (Request::is('profile/posts/*'))
+                            <x-posts />
+                        @endif
+
+                        @if (Request::is('profile/images/*'))
+                            <x-postgallery />
+                        @endif
+
+                        @if (Request::is('profile/jobs/*'))
+                            <x-jobposts />
+                        @endif
                     @else
                         <x-privacy />
                     @endif
                 </div>
             </div>
-
             <div class="w-1/4 rounded-xl h-fit bg-white px-4 py-3">
                 <h3 class="font-bold text-stone-700">More Peoples for You</h3>
                 <div class="flex flex-col gap-3 items-center justify-center mt-2">

@@ -15,7 +15,17 @@ class ViewsController extends Controller {
         return view("messages");
     }
     public function notifications() {
-        return view("notifications");
+        $notifications = [];
+
+        // temporary code for generating notification
+        for ($i = 1; $i <= 15; $i++) {
+            array_push($notifications, [
+                "title" => "notification-" . $i,
+                "link" => "#"
+            ]);
+        }
+
+        return view("notifications")->with(compact('notifications'));
     }
     public function settings() {
         return view("settings");

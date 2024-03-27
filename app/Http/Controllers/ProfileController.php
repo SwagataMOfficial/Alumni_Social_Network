@@ -9,30 +9,15 @@ class ProfileController extends Controller {
     /**
      * Display a listing of the resource.
      */
-    public function profile($id) {
+    public function view_page($any, $id) {   // $any is nothing but the variable to allow app use the any routing
         // $user = User::where("remember_token","=",$id)->get();
         // $data = compact("user");
         // return view()->with($data); // TODO: uncomment this line
-        // for development purpose
-        $profileStatus = 0;
-        return view('profile-post')->with(compact("profileStatus"));
-    }
 
-    public function images($id) {
-        // $user = User::where("remember_token","=",$id)->get();
-        // $data = compact("user");
-        // return view()->with($data); // TODO: uncomment this line
+
         // for development purpose
         $profileStatus = 1;
-        return view('profile-images')->with(compact("profileStatus"));
-    }
-    public function jobs($id) {
-        // $user = User::where("remember_token","=",$id)->get();
-        // $data = compact("user");
-        // return view()->with($data); // TODO: uncomment this line
-        // for development purpose
-        $profileStatus = 0;
-        return view('profile-jobs')->with(compact("profileStatus"));
+        return view('profiles')->with(compact("profileStatus"));
     }
 
     /**

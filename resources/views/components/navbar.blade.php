@@ -1,4 +1,4 @@
-<header class="sticky top-0 bg-white border-b border-b-gray-600 flex items-center justify-between">
+<header class="sticky top-0 z-20 bg-white border-b border-b-gray-600 flex items-center justify-between">
     <div class="flex items-center gap-4 ml-24">
         <a href="/" class="aspect-square" id="logo">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10">
@@ -13,7 +13,7 @@
         <form method="get" action="/profiles/search" class="relative">
             <input type="search"
                 class="w-96 bg-gray-100 border border-stone-400 outline-none text-xl text-black pl-11 py-1 rounded-lg"
-                placeholder="Search">
+                placeholder="Search" id="search" name="search">
             <span id="search-icon" class="absolute top-[6px] left-3">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                     <path fill-rule="evenodd"
@@ -130,52 +130,168 @@
                     <span class="font-semibold">Notifications</span>
                 </a>
             @endif
-            {{-- profile tab(unique) --}}
-            @if (Request::is('profile/settings/*'))
-                <a href="/profile/settings/1"
-                    class="flex flex-col items-center justify-center px-4 py-2 text-stone-600 hover:bg-gray-200 hover:text-stone-800">
-                    <span>
-                        <img src="/storage/profile.jpg" alt="profile_image"
-                            class="w-7 object-cover aspect-square rounded-[50%]">
-                    </span>
-                    <span class="font-semibold flex gap-1 items-center">
-                        <span class="text-sm">Profile</span>
-                        <span class="mt-1">
+            <div class="relative">
+                @if (Request::is('profile/*'))
+                    <button id="profile_btn" onclick="toggleDropdown()"
+                        class="flex flex-col items-center justify-center px-4 py-2 mr-1 text-stone-600 hover:bg-gray-200 hover:text-stone-800 border-b-[3px] border-black">
+                        <span>
+                            <img src="/storage/profile.jpg" alt="profile_image"
+                                class="w-7 object-cover aspect-square rounded-[50%]">
+                        </span>
+                        <span class="font-semibold flex gap-1 items-center">
+                            <span class="text-sm">Profile</span>
+                            <span class="mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                    class="w-3 aspect-square rotate-90" id="btn_pointer">
+                                    <path fill-rule="evenodd"
+                                        d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                        </span>
+                    </button>
+                @else
+                    <button id="profile_btn" onclick="toggleDropdown()"
+                        class="flex flex-col items-center justify-center px-4 py-2 mr-1 text-stone-600 hover:bg-gray-200 hover:text-stone-800">
+                        <span>
+                            <img src="/storage/profile.jpg" alt="profile_image"
+                                class="w-7 object-cover aspect-square rounded-[50%]">
+                        </span>
+                        <span class="font-semibold flex gap-1 items-center">
+                            <span class="text-sm">Profile</span>
+                            <span class="mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                    class="w-3 aspect-square rotate-90" id="btn_pointer">
+                                    <path fill-rule="evenodd"
+                                        d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                        </span>
+                    </button>
+                @endif
+                <div id="dropdown-profile"
+                    class="mt-2 absolute z-10 top-full right-0 bg-white flex flex-col justify-center w-max max-h-0 overflow-hidden transition-all ease-in duration-300">
+                    <div class="mx-3 py-2 flex items-center justify-start gap-3 border-b-2 border-b-gray-400">
+                        <img class="w-10 aspect-square object-cover rounded-[50%] border-2 border-gray-400 select-none"
+                            src="/storage/profile.jpg" alt="profile">
+                        <p class="text-sm font-semibold">Swagata Mukherjee</p>
+                    </div>
+
+                    {{-- item-1 --}}
+                    <a href="/profile/posts/1"
+                        class="group px-3 py-2 flex items-center justify-between w-full cursor-pointer hover:bg-gray-100"
+                        id="highlights">
+                        <div class="flex items-center gap-3">
+                            <span class="bg-stone-300 rounded-full aspect-square w-8 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                    class="w-4 h-4 text-stone-700">
+                                    <path fill-rule="evenodd"
+                                        d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span class="text-md">Your Profile</span>
+                        </div>
+                        <span class="pl-6 group-hover:translate-x-1 transition duration-200 ease-in">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                class="w-3 aspect-square rotate-90">
+                                class="w-4 aspect-square">
                                 <path fill-rule="evenodd"
-                                    d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
+                                    d="M16.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 0 1 1.06-1.06l7.5 7.5Z"
                                     clip-rule="evenodd" />
                             </svg>
                         </span>
-                    </span>
-                </a>
-            @else
-                <a href="/profile/settings/1"
-                    class="flex flex-col items-center justify-center px-4 py-2 text-stone-600 hover:bg-gray-200 hover:text-stone-800">
-                    <span>
-                        <img src="/storage/profile.jpg" alt="profile_image"
-                            class="w-7 object-cover aspect-square rounded-[50%]">
-                    </span>
-                    <span class="font-semibold flex gap-1 items-center">
-                        <span class="text-sm">Profile</span>
-                        <span class="mt-1">
+                    </a>
+
+                    {{-- item-2 --}}
+                    <a href="/settings"
+                        class="group px-3 py-2 flex items-center justify-between w-full cursor-pointer hover:bg-gray-100"
+                        id="highlights">
+                        <div class="flex items-center gap-3">
+                            <span class="bg-stone-300 rounded-full aspect-square w-8 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                    class="w-4 h-4 text-stone-700">
+                                    <path fill-rule="evenodd"
+                                        d="M12 6.75a5.25 5.25 0 0 1 6.775-5.025.75.75 0 0 1 .313 1.248l-3.32 3.319c.063.475.276.934.641 1.299.365.365.824.578 1.3.64l3.318-3.319a.75.75 0 0 1 1.248.313 5.25 5.25 0 0 1-5.472 6.756c-1.018-.086-1.87.1-2.309.634L7.344 21.3A3.298 3.298 0 1 1 2.7 16.657l8.684-7.151c.533-.44.72-1.291.634-2.309A5.342 5.342 0 0 1 12 6.75ZM4.117 19.125a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75h-.008a.75.75 0 0 1-.75-.75v-.008Z"
+                                        clip-rule="evenodd" />
+                                    <path
+                                        d="m10.076 8.64-2.201-2.2V4.874a.75.75 0 0 0-.364-.643l-3.75-2.25a.75.75 0 0 0-.916.113l-.75.75a.75.75 0 0 0-.113.916l2.25 3.75a.75.75 0 0 0 .643.364h1.564l2.062 2.062 1.575-1.297Z" />
+                                    <path fill-rule="evenodd"
+                                        d="m12.556 17.329 4.183 4.182a3.375 3.375 0 0 0 4.773-4.773l-3.306-3.305a6.803 6.803 0 0 1-1.53.043c-.394-.034-.682-.006-.867.042a.589.589 0 0 0-.167.063l-3.086 3.748Zm3.414-1.36a.75.75 0 0 1 1.06 0l1.875 1.876a.75.75 0 1 1-1.06 1.06L15.97 17.03a.75.75 0 0 1 0-1.06Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+
+                            </span>
+                            <span class="text-md">Settings & Privacy</span>
+                        </div>
+                        <span class="pl-6 group-hover:translate-x-1 transition duration-200 ease-in">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                class="w-3 aspect-square rotate-90">
+                                class="w-4 aspect-square">
                                 <path fill-rule="evenodd"
-                                    d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
+                                    d="M16.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 0 1 1.06-1.06l7.5 7.5Z"
                                     clip-rule="evenodd" />
                             </svg>
                         </span>
-                    </span>
-                </a>
-            @endif
+                    </a>
+
+                    {{-- item-3 --}}
+                    <a href="#"
+                        class="group px-3 py-2 flex items-center justify-between w-full cursor-pointer hover:bg-gray-100"
+                        id="highlights">
+                        <div class="flex items-center gap-3">
+                            <span class="bg-stone-300 rounded-full aspect-square w-8 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                    class="w-5 h-5 text-stone-700">
+                                    <path fill-rule="evenodd"
+                                        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 0 1-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 0 1-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 0 1-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584ZM12 18a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span class="text-md">Help & Support</span>
+                        </div>
+                        <span class="pl-6 group-hover:translate-x-1 transition duration-200 ease-in">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-4 aspect-square">
+                                <path fill-rule="evenodd"
+                                    d="M16.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 0 1 1.06-1.06l7.5 7.5Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                    </a>
+
+                    {{-- item-4 --}}
+                    <a href="#"
+                        class="group px-3 py-2 flex items-center justify-between w-full cursor-pointer hover:bg-gray-100"
+                        id="highlights">
+                        <div class="flex items-center gap-3">
+                            <span class="bg-stone-300 rounded-full aspect-square w-8 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                    class="w-5 h-5 text-stone-700 rotate-180">
+                                    <path d="M16 13v-2H7V8l-5 4 5 4v-3z"></path>
+                                    <path
+                                        d="M20 3h-9c-1.103 0-2 .897-2 2v4h2V5h9v14h-9v-4H9v4c0 1.103.897 2 2 2h9c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2z">
+                                    </path>
+                                </svg>
+                            </span>
+                            <span class="text-md">Logout</span>
+                        </div>
+                        <span class="pl-6 group-hover:translate-x-1 transition duration-200 ease-in">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-4 aspect-square">
+                                <path fill-rule="evenodd"
+                                    d="M16.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 0 1 1.06-1.06l7.5 7.5Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+            </div>
         </nav>
 
         {{-- This is another tab which is not part of the ul --}}
         @if (Request::is('settings'))
             <a href="/settings"
-                class="flex flex-col items-center justify-center px-4 py-2 text-stone-600 hover:bg-gray-200 hover:text-stone-800 border-b-[3px] border-black">
+                class="flex flex-col items-center justify-center px-4 py-2 ml-1 text-stone-600 hover:bg-gray-200 hover:text-stone-800 border-b-[3px] border-black">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                         <path fill-rule="evenodd"
@@ -187,7 +303,7 @@
             </a>
         @else
             <a href="/settings"
-                class="flex flex-col items-center justify-center px-4 py-2 text-stone-600 hover:bg-gray-200 hover:text-stone-800">
+                class="flex flex-col items-center justify-center px-4 py-2 ml-1 text-stone-600 hover:bg-gray-200 hover:text-stone-800">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                         <path fill-rule="evenodd"
@@ -200,3 +316,16 @@
         @endif
     </div>
 </header>
+@push('script')
+    <script>
+        let dropdown = document.getElementById('dropdown-profile');
+
+        function toggleDropdown() {
+            document.getElementById('btn_pointer').classList.toggle('rotate-90');
+            document.getElementById('btn_pointer').classList.toggle('-rotate-90');
+            dropdown.classList.toggle('border-2');
+            dropdown.classList.toggle('border-gray-400');
+            dropdown.classList.toggle('max-h-72');
+        }
+    </script>
+@endpush
