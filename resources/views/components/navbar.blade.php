@@ -204,7 +204,7 @@
                     </a>
 
                     {{-- item-2 --}}
-                    <a href="/settings"
+                    <a href="/settings/security-and-privacy/1"
                         class="group px-3 py-2 flex items-center justify-between w-full cursor-pointer hover:bg-gray-100"
                         id="highlights">
                         <div class="flex items-center gap-3">
@@ -235,7 +235,7 @@
                     </a>
 
                     {{-- item-3 --}}
-                    <a href="#"
+                    <a href="/help-and-support"
                         class="group px-3 py-2 flex items-center justify-between w-full cursor-pointer hover:bg-gray-100"
                         id="highlights">
                         <div class="flex items-center gap-3">
@@ -260,7 +260,7 @@
                     </a>
 
                     {{-- item-4 --}}
-                    <a href="#"
+                    <a href="/account/logout"
                         class="group px-3 py-2 flex items-center justify-between w-full cursor-pointer hover:bg-gray-100"
                         id="highlights">
                         <div class="flex items-center gap-3">
@@ -289,8 +289,8 @@
         </nav>
 
         {{-- This is another tab which is not part of the ul --}}
-        @if (Request::is('settings'))
-            <a href="/settings"
+        @if (Request::is('settings/*'))
+            <a href="/settings/account/1"
                 class="flex flex-col items-center justify-center px-4 py-2 ml-1 text-stone-600 hover:bg-gray-200 hover:text-stone-800 border-b-[3px] border-black">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
@@ -302,7 +302,7 @@
                 <span class="font-semibold">Settings</span>
             </a>
         @else
-            <a href="/settings"
+            <a href="/settings/general/1"
                 class="flex flex-col items-center justify-center px-4 py-2 ml-1 text-stone-600 hover:bg-gray-200 hover:text-stone-800">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">

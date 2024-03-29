@@ -20,16 +20,10 @@ Route::get("/", [ViewsController::class, "index"]);
 Route::get("/friends", [ViewsController::class, "friends"]);
 Route::get("/messages", [ViewsController::class, "messages"]);
 Route::get("/notifications", [ViewsController::class, "notifications"]);
-Route::get("/settings", [ViewsController::class, "settings"]);
+Route::get("/settings/{any}/{user_token}", [ProfileController::class, "view_settings"]);
 
 // group routing [routes will contain '/profile' first then followed by other routing parameters]
 Route::group(['prefix' => '/profile'], function () {
     // {any} means after /profile there can be any routing names and {user_token} means the id of the user
     Route::get("/{any}/{user_token}", [ProfileController::class, "view_page"])->middleware('profile_guard');
-    Route::get("/settings/{user_token}", [ProfileController::class, "settings"]);
-});
-
-// for testing routes
-Route::get('/profile/{other}/{id}', function ($any, $id) {
-    echo $id;
 });

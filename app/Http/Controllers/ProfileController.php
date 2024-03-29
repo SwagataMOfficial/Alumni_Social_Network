@@ -19,6 +19,15 @@ class ProfileController extends Controller {
         $profileStatus = 1;
         return view('profiles')->with(compact("profileStatus"));
     }
+    
+    public function view_settings($any, $id) {   // $any is nothing but the variable to allow app use the any routing
+        // $user = User::where("remember_token","=",$id)->get();
+        // $data = compact("user");
+        // return view()->with($data); // TODO: uncomment this line
+        
+        // for development purpose
+        return view('settings');
+    }
 
     /**
      * Show the form for creating a new resource.
