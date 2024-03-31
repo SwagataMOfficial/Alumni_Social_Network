@@ -8,6 +8,49 @@
     {{-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" /> --}}
     @stack('title')
     @vite('resources/css/app.css')
+    <style>
+        /* width */
+        /* ::-webkit-scrollbar {
+            width: 15px;
+        } */
+
+        /* Track */
+        /* ::-webkit-scrollbar-track {
+            background: #ff0000;
+        } */
+
+        /* Handle */
+        /* ::-webkit-scrollbar-thumb {
+            background: #00ff26;
+            border-radius: 1px;
+        } */
+
+        /* Handle on hover */
+        /* ::-webkit-scrollbar-thumb:hover {
+            background: #1900ff;
+        } */
+
+
+        /* width */
+        ::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #454545;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #00aeff;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0062ff;
+        }
+    </style>
 </head>
 
 <body class="font-sans bg-gray-100">

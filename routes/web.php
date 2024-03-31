@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ViewsController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,10 +21,12 @@ Route::get("/", [ViewsController::class, "index"]);
 Route::get("/friends", [ViewsController::class, "friends"]);
 Route::get("/messages", [ViewsController::class, "messages"]);
 Route::get("/notifications", [ViewsController::class, "notifications"]);
-Route::get("/settings/{any}/{user_token}", [ProfileController::class, "view_settings"]);
+Route::get("/settings/{any}/{user_token}", [ProfileController::class, "view_settings"])->middleware('settings_guard');
+// Route::get("/settings/{any}/{user_token}", [ProfileController::class, "view_settings"]);
 
 // group routing [routes will contain '/profile' first then followed by other routing parameters]
 Route::group(['prefix' => '/profile'], function () {
+    Route::get("/", [ProfileController::class, 'view_search']);
     // {any} means after /profile there can be any routing names and {user_token} means the id of the user
     Route::get("/{any}/{user_token}", [ProfileController::class, "view_page"])->middleware('profile_guard');
 });
