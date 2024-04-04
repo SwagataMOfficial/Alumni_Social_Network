@@ -102,7 +102,7 @@
                     </div>
 
                     {{-- item-1 --}}
-                    <a href="/profile/posts/1"
+                    <a href="/profile/home/1"
                         class="group px-3 py-2 flex items-center justify-between w-full cursor-pointer hover:bg-gray-100"
                         id="highlights">
                         <div class="flex items-center gap-3">
