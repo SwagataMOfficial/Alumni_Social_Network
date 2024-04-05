@@ -64,3 +64,54 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Run Locally
+
+- Clone the project
+
+```bash
+  git clone https://github.com/SkMdAltab/Alumni_Social_Network.git
+```
+
+- Go to the project directory
+
+```bash
+  cd Alumni_Social_Network
+```
+
+- Install dependencies
+
+```bash
+  npm install
+```
+
+- Setup Laravel
+```bash
+  composer install
+```
+
+- Setup Env File
+```bash
+  cp .env.example .env
+```
+
+- Configure Cache
+```bash
+  php artisan config:Cache
+```
+
+- Generate Artisan Key
+```bash
+  php artisan key:generate
+```
+
+- Migrate the Database
+```bash
+  php artisan migrate
+```
+
+- Start the server
+
+```bash
+  npm run start
+```
