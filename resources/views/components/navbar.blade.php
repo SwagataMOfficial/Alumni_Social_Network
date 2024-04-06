@@ -1,6 +1,6 @@
 <header class="sticky top-0 z-20 bg-white border-b border-b-gray-600 flex items-center justify-between">
     <div class="flex items-center gap-4 ml-24">
-        <a href="/" class="aspect-square" id="logo">
+        <a href="/feed" class="aspect-square" id="logo">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10">
                 <path
                     d="M11.7 2.805a.75.75 0 0 1 .6 0A60.65 60.65 0 0 1 22.83 8.72a.75.75 0 0 1-.231 1.337 49.948 49.948 0 0 0-9.902 3.912l-.003.002c-.114.06-.227.119-.34.18a.75.75 0 0 1-.707 0A50.88 50.88 0 0 0 7.5 12.173v-.224c0-.131.067-.248.172-.311a54.615 54.615 0 0 1 4.653-2.52.75.75 0 0 0-.65-1.352 56.123 56.123 0 0 0-4.78 2.589 1.858 1.858 0 0 0-.859 1.228 49.803 49.803 0 0 0-4.634-1.527.75.75 0 0 1-.231-1.337A60.653 60.653 0 0 1 11.7 2.805Z" />
@@ -25,8 +25,8 @@
     </div>
     <div class="flex">
         <nav class="flex gap-1 items-center border-r-[3px] border-r-gray-500">
-            <a href="/"
-                class="flex flex-col items-center justify-center px-4 py-2 text-stone-600 hover:bg-gray-200 hover:text-stone-800 {{ Request::is('/') ? 'border-b-[3px] border-black' : '' }} ">
+            <a href="/feed"
+                class="flex flex-col items-center justify-center px-4 py-2 text-stone-600 hover:bg-gray-200 hover:text-stone-800 {{ Request::is('feed') ? 'border-b-[3px] border-black' : '' }} ">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                         <path
@@ -77,7 +77,7 @@
                 <button id="profile_btn" onclick="toggleDropdown()"
                     class="flex flex-col items-center justify-center px-4 py-2 mr-1 text-stone-600 hover:bg-gray-200 hover:text-stone-800 {{ Request::is('profile/*') ? 'border-b-[3px] border-black' : '' }} ">
                     <span>
-                        <img src="/storage/profile.jpg" alt="profile_image"
+                        <img src="/storage/dummy/dummy.jpeg" alt="profile_image"
                             class="w-7 object-cover aspect-square rounded-[50%]">
                     </span>
                     <span class="font-semibold flex gap-1 items-center">
@@ -97,7 +97,7 @@
                     class="mt-2 absolute z-10 top-full right-0 bg-white flex flex-col justify-center w-max max-h-0 overflow-hidden transition-all ease-in duration-300">
                     <div class="mx-3 py-2 flex items-center justify-start gap-3 border-b-2 border-b-gray-400">
                         <img class="w-10 aspect-square object-cover rounded-[50%] border-2 border-gray-400 select-none"
-                            src="/storage/profile.jpg" alt="profile">
+                            src="/storage/dummy/dummy.jpeg" alt="profile">
                         <p class="text-sm font-semibold">Swagata Mukherjee</p>
                     </div>
 
@@ -183,7 +183,7 @@
                     </a>
 
                     {{-- item-4 --}}
-                    <a href="/account/logout"
+                    <a href="{{ route('auth.logout') }}"
                         class="group px-3 py-2 flex items-center justify-between w-full cursor-pointer hover:bg-gray-100"
                         id="highlights">
                         <div class="flex items-center gap-3">

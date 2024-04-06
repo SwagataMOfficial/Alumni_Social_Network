@@ -70,7 +70,7 @@
                                 {{-- pending request peoples will appear here --}}
                                 <div class="flex items-center justify-between mb-3 px-4">
                                     <div class="flex justify-center items-center gap-4">
-                                        <img src="/storage/profile.jpg" alt="profile image"
+                                        <img src="/storage/dummy/dummy.jpeg" alt="profile image"
                                             class="w-14 object-cover aspect-square rounded-[50%] border-2 border-slate-800">
                                         <div class="flex flex-col">
                                             <span class="text-xl font-bold">{{ $user['name'] }}</span>
@@ -116,8 +116,9 @@
                             @foreach ($s_peoples as $people)
                                 <div
                                     class="rounded-xl bg-slate-200 overflow-hidden relative flex flex-col justify-start items-center">
-                                    <img src="/storage/cover.jpg" alt="cover photo" class="object-cover max-h-16 w-full">
-                                    <img src="/storage/profile.jpg" alt="profile photo"
+                                    <img src="/storage/dummy/dummy.jpeg" alt="cover photo"
+                                        class="object-cover max-h-16 w-full">
+                                    <img src="/storage/dummy/dummy.jpeg" alt="profile photo"
                                         class="absolute top-7 w-20 aspect-square object-cover rounded-[50%] border-2 border-slate-600">
                                     <p class="mt-12 font-semibold text-xl">{{ $people['name'] }}</p>
                                     <p class="text-md py-1">Passout year - {{ $people['passout'] }}</p>

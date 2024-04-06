@@ -106,7 +106,7 @@ backdrop-filter: blur(1px);">
                         $('#login_form')[0].reset();
                         // Reset the button text
                         $("#login_btn").text("Submit");
-                        window.location.href = "{{ route('profile') }}";
+                        window.location.href = "{{ route('feed') }}";
                     },
                     error: function(xhr, status, error) {
                         // Parse the error response JSON

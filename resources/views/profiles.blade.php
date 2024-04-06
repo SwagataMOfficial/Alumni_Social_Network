@@ -7,9 +7,10 @@
         <div class="w-10/12 mx-auto pt-3 flex justify-center gap-10">
             <div class="w-3/4">
                 <div class="rounded-xl overflow-hidden relative mb-3">
-                    <img class="w-full h-40 object-cover" src="/storage/cover.jpg" alt="background image" id="profile-cover">
+                    <img class="w-full h-40 object-cover" src="/storage/dummy/dummy.jpeg" alt="background image"
+                        id="profile-cover">
                     <img class="absolute top-16 left-8 z-10 w-32 aspect-square rounded-[50%] object-cover outline outline-slate-500"
-                        src="/storage/profile.jpg" alt="profile picture" id="profile-picture">
+                        src="/storage/dummy/dummy.jpeg" alt="profile picture" id="profile-picture">
                     <x-profilesection friend="1" />
                 </div>
                 <div class="rounded-xl overflow-hidden bg-white pb-4">
@@ -82,26 +83,28 @@
                     @endif
                 </div>
             </div>
-            <div class="w-1/4 rounded-xl h-fit bg-white px-4 py-3">
+            {{-- comment --}}
+            {{-- <div class="w-1/4 rounded-xl h-fit bg-white px-4 py-3">
                 <h3 class="font-bold text-stone-700">More Peoples for You</h3>
                 <div class="flex flex-col gap-3 items-center justify-center mt-2">
                     @for ($i = 1; $i <= 4; $i++)
                         <x-people username="Swagata Mukherjee" about="Student at Techno India Hooghly"
-                            imageLink="profile.jpg" />
+                            imageLink="dummy/dummy.jpeg" />
                     @endfor
                 </div>
                 <div class="pt-3 px-4">
                     <a class="flex text-stone-600 hover:text-stone-900 text-sm" href="#">
-                        <span class="font-semibold">View all</span>
-                        {{-- <span class="material-symbols-outlined">arrow_drop_down</span> --}}
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                        <span class="font-semibold">View all</span> --}}
+
+            {{-- <span class="material-symbols-outlined">arrow_drop_down</span> --}}
+            {{-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                             <path fill-rule="evenodd"
                                 d="M9.47 15.28a.75.75 0 0 0 1.06 0l4.25-4.25a.75.75 0 1 0-1.06-1.06L10 13.69 6.28 9.97a.75.75 0 0 0-1.06 1.06l4.25 4.25ZM5.22 6.03l4.25 4.25a.75.75 0 0 0 1.06 0l4.25-4.25a.75.75 0 0 0-1.06-1.06L10 8.69 6.28 4.97a.75.75 0 0 0-1.06 1.06Z"
                                 clip-rule="evenodd" />
                         </svg>
                     </a>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection

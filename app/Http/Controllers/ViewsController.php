@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class ViewsController extends Controller {
     public function index() {
-        return view("index");
+        return view("feed");
     }
     public function friends() {
         $s_peoples = [
