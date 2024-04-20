@@ -1,9 +1,11 @@
-@extends('layout.app')
+@extends('layouts.main')
 
-@section('title', 'Reset Password')
+@push('title')
+    <title>Reset Password | Alumni Junction</title>
+@endpush
 
-@section('content')
-    <section class="min-h-screen flex items-center justify-center">
+@section('main-section')
+    <section class="min-h-screen flex items-center justify-center" style="background-image: url('{{ asset('images/login_background_img.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; backdrop-filter: blur(1px);">
         <div id="resetFormContainer" class="bg-gray-100 p-5 flex rounded-2xl shadow-lg max-w-3xl">
             <div class=" px-5">
                 <h1 class="text-3xl font-semibold mb-8 text-gray-800">Reset Your Password</h1>
@@ -41,7 +43,7 @@
 @endsection
 
 
-@section('script')
+@push('script')
     <script>
         $(document).ready(function() {
             $('#reset_pass_btn').click(function(e) {
@@ -96,6 +98,4 @@
             }
         });
     </script>
-
-
-@endsection
+@endpush

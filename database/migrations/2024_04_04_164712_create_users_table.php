@@ -11,19 +11,45 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->string('student_id')->primary();
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->bigInteger('student_id')->primary();
+            $table->string('name', 100);
+            $table->string('email', 150)->unique();
             $table->string('password');
-            $table->string('picture')->nullable();
-            $table->string('graduation_year');
-            $table->string('degree');
-            $table->string('dob')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('gender')->nullable();
-            $table->string('token')->nullable();
+            $table->rememberToken();
             $table->timestamp('token_expire')->nullable();
+            $table->string('phone', 12)->nullable();
+            $table->date('dob')->nullable();
+            $table->enum('gender', ["M","F","O", null])->nullable();
+            $table->text('address')->nullable();
+            $table->string('profile_picture', 50)->default('avatar.jpg');
+            $table->string('cover_picture', 50)->default('cover.png');
+            $table->bigInteger('followers')->default('0');
+            $table->text('about')->nullable();
+            $table->text('skills')->nullable();
+            $table->text('expertise')->nullable();
+            $table->text('education')->nullable();
+            $table->year('graduation_year');
+            $table->enum('gender', ["BCA","BBA","MCA", null])->nullable()->default(null);
+            $table->text('career_history')->nullable();
+            $table->text('languages')->nullable();
+            $table->text('projects')->nullable();
+            $table->text('publications')->nullable();
+            $table->text('facebook_link')->nullable();
+            $table->text('instagram_link')->nullable();
+            $table->text('twitter_link')->nullable();
+            $table->text('github_link')->nullable();
+            $table->text('linkedin_link')->nullable();
+            $table->boolean('profile_visibility')->default(true);
+            $table->text('first_company')->nullable();
+            $table->text('current_company')->nullable();
+            $table->text('certificates')->nullable();
+            $table->string('resume', 30)->nullable();
+            $table->string('nickname', 100)->nullable();
+            $table->string('hostel', 100)->nullable();
+            $table->string('verification_document', 100);
             $table->timestamps();
+            $table->timestamp('verified_at')->nullable()->default(null);
+            $table->timestamp('deleted_at')->nullable()->default(null);
         });
     }
 

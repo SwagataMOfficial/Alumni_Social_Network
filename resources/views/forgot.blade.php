@@ -1,10 +1,12 @@
-@extends('layout.app')
+@extends('layouts.main')
 
-@section('title', 'Forgot Password')
+@push('title')
+    <title>Forgot Password | Alumni Junction</title>
+@endpush
 
-@section('content')
+@section('main-section')
     <section class="min-h-screen flex items-center justify-center"
-        style="background-image: url('{{ asset('images/login_background_img.png') }}');
+        style="background-image: url('{{ asset('images/reg_background_img.png') }}');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -36,7 +38,7 @@
     </section>
 @endsection
 
-@section('script')
+@push('script')
     <script>
         $(document).ready(function() {
             $('#forgot_pass_btn').click(function(e) {
@@ -80,4 +82,4 @@
             }
         });
     </script>
-@endsection
+@endpush

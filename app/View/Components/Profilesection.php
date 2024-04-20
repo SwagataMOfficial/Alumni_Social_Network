@@ -9,12 +9,14 @@ use Illuminate\View\Component;
 class Profilesection extends Component
 {
     public $friend;
+    public $details;
     /**
      * Create a new component instance.
      */
-    public function __construct($friend=0)
+    public function __construct($friend=0, $details=0)
     {
         $this->friend = $friend;
+        $this->details = $details;
     }
 
     /**

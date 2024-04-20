@@ -1,51 +1,98 @@
 <div class="flex justify-between pt-10 pb-8 px-8 bg-white" id="user-details">
     {{-- main user details --}}
     <div class="flex flex-col items-start gap-3" id="highlights">
-        <p class="text-4xl font-bold text-stone-600">Swagata Mukherjee</p>
-        <p class="text-xl font-semibold text-stone-500">Student at Techno India Hooghly</p>
+        <p class="text-4xl font-bold text-stone-600">{{ $details['name'] ? $details['name'] : 'Not set' }}</p>
+        {{-- <p class="text-4xl font-bold text-stone-600">Username</p> --}}
+        <p class="text-xl font-semibold text-stone-500">{{ $details['about'] ? $details['about'] : 'Not set' }}</p>
         <div>
-            <a href="#" class="text-blue-700 font-bold hover:underline hover:underline-offset-2">1500
-                followers</a>
+            <a href="#"
+                class="text-blue-700 font-bold hover:underline hover:underline-offset-2">{{ $details['followers'] }}</a>
         </div>
-        @if ($friend)
+
+        {{-- if the profile is mine then don't show the buttons like add friend, etc --}}
+        @if ($details['remember_token'] == session()->get('token'))
             <div class="flex gap-4">
-                <button
+                <a href="{{ route('profile.edit') }}"
                     class="rounded-3xl px-6 py-2 font-bold tracking-wide bg-blue-600 text-white hover:bg-blue-700 flex items-center gap-2">
-                    <span>Message</span>
+                    <span>Edit Profile</span>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                            <path fill-rule="evenodd"
-                                d="M10 3c-4.31 0-8 3.033-8 7 0 2.024.978 3.825 2.499 5.085a3.478 3.478 0 0 1-.522 1.756.75.75 0 0 0 .584 1.143 5.976 5.976 0 0 0 3.936-1.108c.487.082.99.124 1.503.124 4.31 0 8-3.033 8-7s-3.69-7-8-7Zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm-2-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
-                                clip-rule="evenodd" />
+                            <path
+                                d="m5.433 13.917 1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
+                            <path
+                                d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 0 10 3H4.75A2.75 2.75 0 0 0 2 5.75v9.5A2.75 2.75 0 0 0 4.75 18h9.5A2.75 2.75 0 0 0 17 15.25V10a.75.75 0 0 0-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5Z" />
                         </svg>
                     </span>
-                </button>
-                <button
-                    class="rounded-3xl px-6 py-2 font-bold tracking-wide bg-red-600 text-white hover:bg-red-700 flex items-center gap-2">
-                    <span>Unfriend</span>
+                </a>
+                {{-- <a href="{{ route('profile.edit') }}"
+                    class="rounded-xl px-3 py-2 font-bold tracking-wide bg-blue-600 text-white hover:bg-blue-700 flex items-center gap-2">
                     <span>
-                        {{-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                            <path
-                                d="M10 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM1.615 16.428a1.224 1.224 0 0 1-.569-1.175 6.002 6.002 0 0 1 11.908 0c.058.467-.172.92-.57 1.174A9.953 9.953 0 0 1 7 18a9.953 9.953 0 0 1-5.385-1.572ZM16.25 5.75a.75.75 0 0 0-1.5 0v2h-2a.75.75 0 0 0 0 1.5h2v2a.75.75 0 0 0 1.5 0v-2h2a.75.75 0 0 0 0-1.5h-2v-2Z" />
-                        </svg> --}}
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                            <path
-                                d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM2.046 15.253c-.058.468.172.92.57 1.175A9.953 9.953 0 0 0 8 18c1.982 0 3.83-.578 5.384-1.573.398-.254.628-.707.57-1.175a6.001 6.001 0 0 0-11.908 0ZM12.75 7.75a.75.75 0 0 0 0 1.5h5.5a.75.75 0 0 0 0-1.5h-5.5Z" />
-                        </svg>
+                            <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z" clip-rule="evenodd" />
+                          </svg>                          
                     </span>
-                </button>
+                </a> --}}
+                <label class="cursor-pointer inline-flex items-center">
+                    <form method="POST" action="{{ route('profile.visibility') }}" class="flex items-center" id="visibility_form">
+                        @csrf
+                        <input type="checkbox" name="profile_visibility" value="{{ $details['profile_visibility'] ? "1" : "0" }}" class="sr-only peer" {{ $details['profile_visibility'] ? "checked" : "" }} id="visibility_input">
+                        {{-- <input type="checkbox" name="profile_visibility" value="1" class="sr-only peer"> --}}
+                        <div
+                            class="relative w-14 h-7 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                        </div>
+                        <span class="ms-3 text-sm font-semibold text-gray-700 dark:text-gray-600">
+                            {{ $details['profile_visibility'] ? 'Public' : 'Private' }}
+                        </span>
+                    </form>
+                </label>
             </div>
         @else
-            <button
-                class="rounded-3xl px-6 py-2 font-bold tracking-wide bg-blue-600 text-white hover:bg-blue-700 flex items-center gap-2">
-                <span>Add Friend</span>
-                <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+            @if (true)
+                {{-- 
+            TODO: check for friend list
+            if the profile is user's friend then the if will be true else false
+        --}}
+                <div class="flex gap-4">
+                    <button
+                        class="rounded-3xl px-6 py-2 font-bold tracking-wide bg-blue-600 text-white hover:bg-blue-700 flex items-center gap-2">
+                        <span>Message</span>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                class="w-5 h-5">
+                                <path fill-rule="evenodd"
+                                    d="M10 3c-4.31 0-8 3.033-8 7 0 2.024.978 3.825 2.499 5.085a3.478 3.478 0 0 1-.522 1.756.75.75 0 0 0 .584 1.143 5.976 5.976 0 0 0 3.936-1.108c.487.082.99.124 1.503.124 4.31 0 8-3.033 8-7s-3.69-7-8-7Zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm-2-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                    </button>
+                    <button
+                        class="rounded-3xl px-6 py-2 font-bold tracking-wide bg-red-600 text-white hover:bg-red-700 flex items-center gap-2">
+                        <span>Unfriend</span>
+                        <span>
+                            {{-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                         <path
                             d="M10 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM1.615 16.428a1.224 1.224 0 0 1-.569-1.175 6.002 6.002 0 0 1 11.908 0c.058.467-.172.92-.57 1.174A9.953 9.953 0 0 1 7 18a9.953 9.953 0 0 1-5.385-1.572ZM16.25 5.75a.75.75 0 0 0-1.5 0v2h-2a.75.75 0 0 0 0 1.5h2v2a.75.75 0 0 0 1.5 0v-2h2a.75.75 0 0 0 0-1.5h-2v-2Z" />
-                    </svg>
-                </span>
-            </button>
+                    </svg> --}}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                class="w-5 h-5">
+                                <path
+                                    d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM2.046 15.253c-.058.468.172.92.57 1.175A9.953 9.953 0 0 0 8 18c1.982 0 3.83-.578 5.384-1.573.398-.254.628-.707.57-1.175a6.001 6.001 0 0 0-11.908 0ZM12.75 7.75a.75.75 0 0 0 0 1.5h5.5a.75.75 0 0 0 0-1.5h-5.5Z" />
+                            </svg>
+                        </span>
+                    </button>
+                </div>
+            @else
+                <button
+                    class="rounded-3xl px-6 py-2 font-bold tracking-wide bg-blue-600 text-white hover:bg-blue-700 flex items-center gap-2">
+                    <span>Add Friend</span>
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                            <path
+                                d="M10 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM1.615 16.428a1.224 1.224 0 0 1-.569-1.175 6.002 6.002 0 0 1 11.908 0c.058.467-.172.92-.57 1.174A9.953 9.953 0 0 1 7 18a9.953 9.953 0 0 1-5.385-1.572ZM16.25 5.75a.75.75 0 0 0-1.5 0v2h-2a.75.75 0 0 0 0 1.5h2v2a.75.75 0 0 0 1.5 0v-2h2a.75.75 0 0 0 0-1.5h-2v-2Z" />
+                        </svg>
+                    </span>
+                </button>
+            @endif
         @endif
     </div>
     {{-- contact details --}}
@@ -65,7 +112,8 @@
                             clip-rule="evenodd" />
                     </svg>
 
-                    <span class="ml-3 text-sm font-semibold">9874963681</span>
+                    <span
+                        class="ml-3 text-sm font-semibold">{{ $details['phone'] ? $details['phone'] : 'Not set' }}</span>
                 </div>
             </div>
             {{-- card-2 --}}
@@ -82,7 +130,8 @@
                             d="m19 8.839-7.77 3.885a2.75 2.75 0 0 1-2.46 0L1 8.839V14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.839Z" />
                     </svg>
 
-                    <span class="ml-3 text-sm font-semibold">swagata@mukherjee</span>
+                    <span
+                        class="ml-3 text-sm font-semibold">{{ $details['email'] ? $details['email'] : 'Not set' }}</span>
                 </div>
             </div>
             {{-- card-3 --}}
@@ -98,7 +147,8 @@
                             clip-rule="evenodd" />
                     </svg>
 
-                    <span class="ml-3 text-sm font-semibold">Hooghly, West Bengal, India</span>
+                    <span
+                        class="ml-3 text-sm font-semibold">{{ $details['address'] ? $details['address'] : 'Not set' }}</span>
                 </div>
             </div>
         </div>

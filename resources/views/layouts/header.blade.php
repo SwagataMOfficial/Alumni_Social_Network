@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {{-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" /> --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
 
     @stack('title')
     @vite('resources/css/app.css')
@@ -55,5 +56,11 @@
     </style>
 </head>
 
-<body class="font-sans bg-gray-100">
-    <x-Navbar />
+<body class="bg-cover bg-no-repeat bg-fixed" style="background-image: url('{{ asset('images/bg.jpg') }}');">
+    @if (Request::is('/'))
+    @elseif (Request::is('register'))
+    @elseif (Request::is('forgot'))
+    @elseif (Request::is('reset-password/*'))
+    @else
+        <x-navbar />
+    @endif

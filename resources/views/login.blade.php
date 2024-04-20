@@ -1,18 +1,14 @@
-@extends('layout.app')
+@extends('layouts.main')
 
-@section('title', 'Login')
+@push('title')
+    <title>Login | Alumni Junction</title>
+@endpush
 
-@section('content')
-
-
+@section('main-section')
     <!-- Body Background Image  -->
 
-    <body class="max-h-screen"
-        style="background-image: url('{{ asset('images/login_background_img.png') }}');
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
-backdrop-filter: blur(1px);">
+    <div class="max-h-screen"
+        style="background-image: url('{{ asset('images/login_background_img.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; backdrop-filter: blur(1px);">
         <section class="border-red-500  min-h-screen flex items-center justify-center">
             <!-- Brand Logo  -->
 
@@ -85,11 +81,9 @@ backdrop-filter: blur(1px);">
                 </div>
             </div>
         </section>
-    </body>
-
-    </html>
+    </div>
 @endsection
-@section('script')
+@push('script')
     <script>
         $(document).ready(function() {
 
@@ -134,4 +128,4 @@ backdrop-filter: blur(1px);">
             }
         });
     </script>
-@endsection
+@endpush

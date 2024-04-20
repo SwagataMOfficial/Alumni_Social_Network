@@ -1,1 +1,1 @@
-<p class="text-3xl font-bold text-blue-800 text-center">User post will appear here</p>
+<p class="text-3xl font-bold text-blue-800 text-center">{{$details['name']}} post will appear here</p>

@@ -8,12 +8,13 @@ use Illuminate\View\Component;
 
 class Aboutprofile extends Component
 {
+    public $details;
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct($details=0)
     {
-        //
+        $this->details = $details;
     }
 
     /**

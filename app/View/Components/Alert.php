@@ -6,15 +6,17 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Postgallery extends Component
+class Alert extends Component
 {
-    public $details;
+    public $color;
+    public $message;
     /**
      * Create a new component instance.
      */
-    public function __construct($details=0)
+    public function __construct($color, $message)
     {
-        $this->details = $details;
+        $this->color = $color;
+        $this->message = $message;
     }
 
     /**
@@ -22,6 +24,6 @@ class Postgallery extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.postgallery');
+        return view('components.alert');
     }
 }

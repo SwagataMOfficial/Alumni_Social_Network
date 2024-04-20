@@ -4,9 +4,10 @@
 @endpush
 @section('main-section')
     {{-- background gray container --}}
-    <div class="container bg-gray-200 min-h-[calc(100vh-67px)]">
+    {{-- <div class="container bg-gray-200 min-h-[calc(100vh-67px)]"> --}}
+    <div class="container">
         {{-- max-width container with left,right space --}}
-        <div class="w-10/12 mx-auto pt-3 flex justify-center gap-10">
+        <div class="px-8 mx-auto pt-3 flex justify-center gap-10">
 
             {{-- left navigation panel --}}
             <div class="w-1/4 rounded-xl h-fit bg-white px-4 py-4">
@@ -21,9 +22,9 @@
                             </svg>
                             <span>Friends</span>
                         </span>
-                        <span class="text-sky-600 font-semibold text-md">30</span>
+                        <span class="text-sky-600 font-semibold text-md">{{ $user['followers'] }}</span>
                     </a>
-                    <a href="#"
+                    {{-- <a href="#"
                         class="px-2 rounded-lg w-full py-2 text-lg flex items-center justify-between hover:bg-stone-200">
                         <span class="flex items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
@@ -34,8 +35,8 @@
                             <span>Groups</span>
                         </span>
                         <span class="text-sky-600 font-semibold text-md">5</span>
-                    </a>
-                    <a href="#"
+                    </a> --}}
+                    {{-- <a href="#"
                         class="px-2 rounded-lg w-full py-2 text-lg flex items-center justify-between hover:bg-stone-200">
                         <span class="flex items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
@@ -46,7 +47,7 @@
                             <span>My contacts</span>
                         </span>
                         <span class="text-sky-600 font-semibold text-md">8</span>
-                    </a>
+                    </a> --}}
                     <a href="#"
                         class="px-2 rounded-lg w-full py-2 text-lg flex items-center gap-2 hover:bg-stone-200">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
@@ -70,8 +71,10 @@
                                 {{-- pending request peoples will appear here --}}
                                 <div class="flex items-center justify-between mb-3 px-4">
                                     <div class="flex justify-center items-center gap-4">
-                                        <img src="/storage/dummy/dummy.jpeg" alt="profile image"
-                                            class="w-14 object-cover aspect-square rounded-[50%] border-2 border-slate-800">
+                                        <a href="/profile/home/{{ $user['remember_token'] }}" class="">
+                                            <img src="/storage/default/avatar.jpg" alt="profile image"
+                                                class="w-14 object-cover aspect-square rounded-[50%] border-2 border-slate-800">
+                                        </a>
                                         <div class="flex flex-col">
                                             <span class="text-xl font-bold">{{ $user['name'] }}</span>
                                             <span class="text-md">{{ $user['bio'] }}</span>
@@ -113,15 +116,18 @@
                         {{-- suggested people cards will appear here --}}
                         <div class="grid grid-cols-4 gap-2">
                             {{-- cards --}}
+                            {{-- @for ($i = 1; $i <= 10; $i++) --}}
                             @foreach ($s_peoples as $people)
                                 <div
                                     class="rounded-xl bg-slate-200 overflow-hidden relative flex flex-col justify-start items-center">
-                                    <img src="/storage/dummy/dummy.jpeg" alt="cover photo"
+                                    <img src="/storage/default/cover.png" alt="cover photo"
                                         class="object-cover max-h-16 w-full">
-                                    <img src="/storage/dummy/dummy.jpeg" alt="profile photo"
-                                        class="absolute top-7 w-20 aspect-square object-cover rounded-[50%] border-2 border-slate-600">
+                                    <a href="/profile/home/{{ $people['remember_token'] }}"
+                                        class="absolute top-7 w-20 aspect-square object-cover rounded-[50%] border-2 border-slate-600 overflow-hidden">
+                                        <img src="/storage/default/avatar.jpg" alt="profile photo" class="w-full h-full">
+                                    </a>
                                     <p class="mt-12 font-semibold text-xl">{{ $people['name'] }}</p>
-                                    <p class="text-md py-1">Passout year - {{ $people['passout'] }}</p>
+                                    <p class="text-md py-1">Passout year - {{ $people['graduation_year'] }}</p>
                                     <button
                                         class="text-sm px-3 py-2 mt-1 rounded-xl bg-indigo-500 hover:bg-indigo-600 border-[3px] border-indigo-900 mb-3 text-white">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
@@ -132,6 +138,7 @@
                                     </button>
                                 </div>
                             @endforeach
+                            {{-- @endfor --}}
                             {{-- @for ($i = 1; $i <= 10; $i++)
                                 <div
                                     class="rounded-xl bg-gray-300 overflow-hidden relative flex flex-col justify-start items-center">

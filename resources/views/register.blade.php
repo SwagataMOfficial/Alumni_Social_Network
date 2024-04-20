@@ -1,12 +1,14 @@
-@extends('layout.app')
+@extends('layouts.main')
 
-@section('title', 'Register')
+@push('title')
+    <title>Register | Alumni Junction</title>
+@endpush
 
-@section('content')
+@section('main-section')
 
     <!-- Body Background Image  -->
 
-    <body class="max-h-screen"
+    <div class="max-h-screen"
         style="background-image: url('{{ asset('images/reg_background_img.png') }}');
     background-size: cover;
     background-position: center;
@@ -98,9 +100,9 @@
                             </div>
                             <!-- File input option  -->
                             <div class="mb-5 flex items-center">
-                                <label for="picture" class="mr-3 text-sm font-medium text-gray-500">Upload Student
+                                <label for="verify_doc" class="mr-3 text-sm font-medium text-gray-500">Upload Student
                                     ID</label>
-                                <input type="file" name="picture" id="picture"
+                                <input type="file" name="verify_doc" id="verify_doc"
                                     class="border border-gray-600 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block"
                                     required>
                             </div>
@@ -129,10 +131,9 @@
                 </div>
             </div>
         </section>
-    </body>
-
+    </div>
 @endsection
-@section('script')
+@push('script')
     <script>
         $(document).ready(function() {
 
@@ -155,7 +156,9 @@
                         $('#register_form')[0].reset();
                         // Reset the button text
                         $("#reg_btn").text("Register");
-
+                        setTimeout(() => {
+                            window.location.href = "{{ url('/') }}";
+                        }, 2000);
                     },
                     error: function(xhr, status, error) {
                         console.error(xhr.responseText);
@@ -184,4 +187,4 @@
             }
         });
     </script>
-@endsection
+@endpush

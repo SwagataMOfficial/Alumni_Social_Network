@@ -4,9 +4,10 @@
 @endpush
 @section('main-section')
     {{-- background gray container --}}
-    <div class="container bg-gray-200 min-h-[calc(100vh-67px)]">
+    {{-- <div class="container bg-gray-200 min-h-[calc(100vh-67px)]"> --}}
+    <div class="container">
         {{-- max-width container with left,right space --}}
-        <div class="w-10/12 mx-auto pt-3 flex justify-center gap-10">
+        <div class="px-8 mx-auto pt-3 flex justify-center gap-10">
 
             {{-- left navigation panel --}}
             <div class="w-1/4 rounded-xl h-fit bg-white pb-3">
@@ -15,7 +16,7 @@
                     <div class="flex flex-col items-center justify-center gap-2 mt-2">
 
                         {{-- tab-1 --}}
-                        <a href="/settings/general/1"
+                        <a href="/settings/general/{{ Session::get('token') }}"
                             class="flex items-center justify-start gap-3 w-full py-2 pl-6 hover:bg-slate-200 {{ Request::is('settings/general/*') ? 'bg-stone-200 border-l-[3px] border-l-sky-600' : '' }} ">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                                 class="w-7 aspect-square text-stone-700">
@@ -32,7 +33,7 @@
                         </a>
 
                         {{-- tab-2 --}}
-                        <a href="/settings/account/1"
+                        <a href="/settings/account/{{ Session::get('token') }}"
                             class="flex items-center justify-start gap-3 w-full py-2 pl-6 hover:bg-slate-200 {{ Request::is('settings/account/*') ? 'bg-stone-200 border-l-[3px] border-l-sky-600' : '' }} ">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                                 class="w-7 aspect-square text-stone-700">
@@ -47,7 +48,7 @@
                         </a>
 
                         {{-- tab-3 --}}
-                        <a href="/settings/security-and-privacy/1"
+                        <a href="/settings/security-and-privacy/{{ Session::get('token') }}"
                             class="flex items-center justify-start gap-3 w-full py-2 pl-6 hover:bg-slate-200 {{ Request::is('settings/security-and-privacy/*') ? 'bg-stone-200 border-l-[3px] border-l-sky-600' : '' }} ">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                                 class="w-7 aspect-square text-stone-700">
@@ -62,7 +63,7 @@
                         </a>
 
                         {{-- tab-4 --}}
-                        <a href="/settings/social-links/1"
+                        <a href="/settings/social-links/{{ Session::get('token') }}"
                             class="flex items-center justify-start gap-3 w-full py-2 pl-6 hover:bg-slate-200 {{ Request::is('settings/social-links/*') ? 'bg-stone-200 border-l-[3px] border-l-sky-600' : '' }} ">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                                 class="w-7 aspect-square text-stone-700">
@@ -78,7 +79,7 @@
                         </a>
 
                         {{-- tab-5 --}}
-                        <a href="/settings/change-password/1"
+                        <a href="/settings/change-password/{{ Session::get('token') }}"
                             class="flex items-center justify-start gap-3 w-full py-2 pl-6 hover:bg-slate-200 {{ Request::is('settings/change-password/*') ? 'bg-stone-200 border-l-[3px] border-l-sky-600' : '' }} ">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                                 class="w-7 aspect-square text-stone-700">
@@ -93,7 +94,7 @@
                         </a>
 
                         {{-- tab-6 --}}
-                        <a href="/settings/notifications/1"
+                        <a href="/settings/notifications/{{ Session::get('token') }}"
                             class="flex items-center justify-start gap-3 w-full py-2 pl-6 hover:bg-slate-200 {{ Request::is('settings/notifications/*') ? 'bg-stone-200 border-l-[3px] border-l-sky-600' : '' }} ">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                                 class="w-7 aspect-square text-stone-700">

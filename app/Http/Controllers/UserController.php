@@ -19,37 +19,41 @@ class UserController extends Controller
     //
     public function index()
     {
-        return view('auth.login');
+        return view('login');
     }
     public function register()
     {
         if (session()->has("loggedInUser")) {
             return redirect('/profile');
         }
-        return view('auth.register');
+        return view('register');
     }
     public function forgot()
     {
         if (session()->has("loggedInUser")) {
             return redirect('/profile');
         }
-        return view('auth.forgot');
+        return view('forgot');
     }
     public function reset_pass(Request $request)
     {
         $email = $request->email;
         $token = $request->token;
-        return view('auth.reset_pass', ['email' => $email, 'token' => $token]);
+        return view('reset_pass', ['email' => $email, 'token' => $token]);
     }
     public function profile()
     {
-        $userData = ['userInfo' => DB::table('users')->where('email', session('loggedInUser'))->first()];
+        $userData = ['userInfo' => User::where('email', session('loggedInUser'))->first()];
         return view('layout.profile', $userData);
     }
     public function logout()
     {
         // Clear the user session
         Session::forget('loggedInUser');
+        Session::forget('loggedin');
+        Session::forget('token');
+        Session::forget('user_id');
+        Session::forget('user_name');
 
         // Redirect the user to the login page or any other page
         return redirect('/');
@@ -69,10 +73,10 @@ class UserController extends Controller
             'dropdown1.required' => 'Graduation Year is required.',
             'dropdown2.required' => 'Degree is required.',
             'student_id.required' => 'Student ID is required.',
-            'picture.required' => 'Picture is required.',
-            'picture.image' => 'Uploaded file is not an image.',
-            'picture.mimes' => 'Only JPG, JPEG, PNG, and GIF files are allowed.',
-            'picture.max' => 'Maximum file size allowed is 2MB.',
+            'verify_doc.required' => 'Picture is required.',
+            'verify_doc.image' => 'Uploaded file is not an image.',
+            'verify_doc.mimes' => 'Only JPG, JPEG, PNG, and GIF files are allowed.',
+            'verify_doc.max' => 'Maximum file size allowed is 2MB.',
         ];
 
         // Define validation rules
@@ -84,7 +88,7 @@ class UserController extends Controller
             'dropdown1' => 'required', // Add validation rule for dropdown1
             'dropdown2' => 'required',
             'student_id' => 'required|string|max:255|unique:users,student_id',
-            'picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'verify_doc' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
             // Add more validation rules as needed
         ];
 
@@ -99,10 +103,11 @@ class UserController extends Controller
         $graduationYear = $request->input('dropdown1');
         $degree = $request->input('dropdown2');
 
-        $filename = time() . '_' . $request->file('picture')->getClientOriginalName();
-        // Store uploaded picture in the public/upload_student_id directory with the unique filename
-        $picturePath = $request->file('picture')->storeAs('upload_student_id', $filename, 'public');
+        // generating filename with original file extension
+        $filename = "verify_doc" . '.' . $request->file('verify_doc')->getClientOriginalExtension();
 
+        // Store uploaded picture in the public/upload_student_id directory with the unique filename
+        
         $user = User::create([
             'student_id' => $request->input('student_id'),
             'name' => $request->input('u_fname'),
@@ -110,10 +115,13 @@ class UserController extends Controller
             'password' => bcrypt($request->input('u_password')),
             'graduation_year' => $graduationYear, // Assuming the field name is 'dropdown1'
             'degree' => $degree,
-            'picture' => $picturePath,
-
+            'profile_picture' => "default/avatar.jpg",
+            'cover_picture' => 'default/cover.png',
+            'verification_document' => $filename,
+            'remember_token' => md5($request->input('student_id') . $request->input('u_mail'))
         ]);
-
+        $request->file('verify_doc')->storeAs($request->input('student_id') . '/verification_document', $filename, 'public');
+        
         // Return success response
         return response()->json(['message' => 'User registered successfully'], 200);
     }
@@ -150,7 +158,11 @@ class UserController extends Controller
 
         // Check if the user exists and the provided password matches
         if ($user && Hash::check($request->password, $user->password)) {
-            session(['loggedInUser' => $user->email]); // You might want to change this
+            session()->put("loggedInUser",$user->email); // You might want to change this
+            session()->put("loggedin", true);
+            session()->put("token", $user->remember_token);
+            session()->put("user_id", $user->student_id);
+            session()->put("user_name", $user->name);
             return response()->json(['message' => 'Login successful'], 200);
         } else {
             // Authentication failed
@@ -178,7 +190,7 @@ class UserController extends Controller
 
             // Save the token and expiration time in the database for the user
             $user->update([
-                'token' => $token,
+                'remember_token' => $token,
                 'token_expire' => $expiration,
             ], ['student_id' => $user->student_id]);
 
@@ -217,7 +229,7 @@ class UserController extends Controller
             // Update the user's password
             $user->update([
                 'password' => Hash::make($request->re_password),
-                'token' => null, // Clear the token after password reset
+                'remember_token' => null, // Clear the token after password reset
                 'token_expire' => null, // Clear the token expiration
             ]);
 
